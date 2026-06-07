@@ -669,5 +669,31 @@ https://templatemo.com/tm-516-known
      <script src="js/smoothscroll.js"></script>
      <script src="js/custom.js"></script>
      <script src="js/welcome.js"></script>
+
+<script>
+    // 1. Ambil elemen teks dan area tombol berdasarkan id dari HTML-mu
+    const userInfo = document.getElementById('userInfo');
+    const authArea = document.getElementById('authArea');
+
+    // 2. Fungsi untuk mengarahkan ke halaman login (bisa dipanggil kapan saja)
+    function goLogin() {
+        window.location.href = 'login/index.html';
+    }
+
+    // 3. Cek apakah statusLogin bernilai true di memori browser
+    if (localStorage.getItem('statusLogin') === 'true') {
+        // Jika SUDAH login:
+        userInfo.innerText = "Sudah Login"; // Ubah teks <p>
+        
+        // Ubah isi di dalam <div id="authArea"> menjadi tombol Logout
+        authArea.innerHTML = '<button id="logoutBtn" class="nav-cta">Logout</button>';
+        
+        // Berikan fungsi klik pada tombol Logout baru tersebut
+        document.getElementById('logoutBtn').onclick = function() {
+            localStorage.removeItem('statusLogin'); // Hapus status login
+            window.location.reload(); // Refresh halaman agar kembali ke "Belum Login"
+        };
+    }
+</script>
 </body>
 </html>
